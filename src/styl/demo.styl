@@ -1,0 +1,43 @@
+@keyframes fadeIn
+  for i in 0..10
+    {10% * i}
+       opacity (i/10)
+
+@keyframes fadeOut
+ for i in 0..10
+   {10% * i}
+      opacity (1-(i/10))
+
+@keyframes blink
+  for i in 0..10
+    {10% * i}
+      opacity (1-(i%2))
+
+
+.demo
+  td
+    width: (100/3)%
+    text-align: center
+    span
+      &.short
+        animation: fadeIn 2s ease
+      &.long
+        animation: blink 2s linear infinite
+      &.fade
+        animation: fadeOut 2s ease both
+        
+#lists .list-col.demo-pic
+  li
+    background-size: cover
+    color: #fff
+    font-size: 24px
+    opacity: .3
+    transition: .3s ease
+    &:active
+    &.active
+      opacity: 1
+  for i in 1..3
+    li:nth-child({i})
+      background-image: url(../img/i.jpg)
+      &:before
+        content: i
