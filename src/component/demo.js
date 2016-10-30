@@ -21,7 +21,6 @@ class App extends Component {
       this.setState({
         willUpdate: false
       })
-      console.log(1)
     }, 2000)
   }
   render() {

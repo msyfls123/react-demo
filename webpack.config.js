@@ -11,7 +11,7 @@ var ROOT_PATH = path.resolve(__dirname),
     TMPL_PATH = path.resolve(APP_PATH, 'tmpl'),
     ENTRY_LIST = ['vendor'],
     ENTRY_PATHS = {
-      vendor: ['react', 'react-dom']
+      vendor: ['redux', 'react-redux', 'redux-thunk']
     }
 
 var files = fs.readdirSync(APP_PATH),
@@ -27,15 +27,15 @@ module.exports = {
   entry: ENTRY_PATHS,
   output: {
     path: DIST_PATH,
-    filename: '[name].[chunkhash:8].js',
-    chunkFilename: '[name].[chunkhash:8].js',
-    // publicPath: 'dist'
+    filename: 'js/[name].[chunkhash:8].js',
+    chunkFilename: 'js/[name].[chunkhash:8].js',
+    publicPath: '/'
   },
   module:{
     loaders:[
       {test:/\.(js|jsx)$/, loader:'babel', exclude:/node_modules/},
       {test:/\.styl$/, loader:ExtractTextPlugin.extract("style-loader", "css-loader!stylus-loader")},
-      {test:/\.(png|jpg|gif)$/, loader:'url?limit=8192&name=[path][name].[ext]?[hash]'}
+      {test:/\.(png|jpg|gif)$/, loader:'url?limit=8192&name=img/[name].[ext]?[hash]'}
     ]
   },
   resolve:{
@@ -48,9 +48,10 @@ module.exports = {
     presets: ['es2015','react'],
     plugins: ['transform-runtime']
   },
-  // externals: {
-  //   'react': 'React'
-  // },
+  externals: {
+    'react': 'React',
+    'react-dom': 'ReactDOM'
+  },
   plugins: [
     new webpack.DefinePlugin({
       'process.env':{
@@ -74,7 +75,7 @@ module.exports = {
         warnings: false
       }
     }),
-    new ExtractTextPlugin("bundle.[contenthash:9].css"),
+    new ExtractTextPlugin("css/bundle.[contenthash:9].css"),
     new HtmlwebpackPlugin({
       title: 'react demo',
       template: path.resolve(TMPL_PATH, 'index.html'),
