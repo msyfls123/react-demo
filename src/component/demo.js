@@ -27,7 +27,7 @@ class App extends Component {
     const {displayNum, couldPost, resultText, add_num, sub_num, post_num} = this.props
     return (
       <div>
-      <table className='table table-striped demo'>
+      <table className='table table-bordered table-zebra demo'>
         <tbody>
           <tr>
             <td> His extra Time </td>
