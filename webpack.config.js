@@ -29,12 +29,12 @@ module.exports = {
     path: DIST_PATH,
     filename: 'js/[name].[chunkhash:8].js',
     chunkFilename: 'js/[name].[chunkhash:8].js',
-    publicPath: '/'
+    publicPath: './'
   },
   module:{
     loaders:[
       {test:/\.(js|jsx)$/, loader:'babel', exclude:/node_modules/},
-      {test:/\.styl$/, loader:ExtractTextPlugin.extract("style-loader", "css-loader!stylus-loader")},
+      {test:/\.styl$/, loader:ExtractTextPlugin.extract('style', 'css!stylus', {publicPath: '../'})},
       {test:/\.(png|jpg|gif)$/, loader:'url?limit=8192&name=img/[name].[ext]?[hash]'}
     ]
   },
@@ -75,7 +75,7 @@ module.exports = {
         warnings: false
       }
     }),
-    new ExtractTextPlugin("css/bundle.[contenthash:9].css"),
+    new ExtractTextPlugin("css/[name].[contenthash:9].css"),
     new HtmlwebpackPlugin({
       title: 'react demo',
       template: path.resolve(TMPL_PATH, 'index.html'),
