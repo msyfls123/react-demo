@@ -1,26 +1,4 @@
 import React, { Component } from 'react'
-import { Link, IndexLink } from 'react-router';
-
-class Main extends Component {
-  render() {
-    return (
-      <div className=''>
-        <div id='nav' className='mod'>
-         <nav className='nav nav-store'>
-           <div className="inner">
-             <ul className="items">
-               <li><IndexLink to="/" activeClassName="active">Home</IndexLink></li>
-               <li><Link to="/help" activeClassName="active">Help</Link></li>
-               <li><Link to="/about" activeClassName="active">About</Link></li>
-             </ul>
-           </div>
-         </nav>
-        </div>
-        {this.props.children}
-      </div>
-    )
-  }
-}
 
 class About extends Component {
   componentDidMount() {
@@ -63,7 +41,6 @@ class Help extends Component {
 }
 
 export {
-  Main,
   About,
   Help
 }

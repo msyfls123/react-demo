@@ -4,7 +4,6 @@ import {
   POST_ING,
   POST_RECEIVED
 } from '../action/demo'
-import { combineReducers } from 'redux'
 
 function displayNum(state = 0, action) {
   switch (action.type) {
@@ -43,10 +42,8 @@ function resultText(state = '', action) {
   }
 }
 
-const demoReducer = combineReducers({
+export default {
   displayNum,
   couldPost,
-  resultText
-})
-
-export default demoReducer
+  resultText,
+}

@@ -1,9 +1,6 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import {add_num, sub_num, post_num} from '../action/demo'
-// import store from '../store/demo'
+import React, { Component, PropTypes } from 'react'
 
-class App extends Component {
+class Demo extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -85,15 +82,13 @@ class App extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  const {displayNum, couldPost, resultText} = state
-  return {
-    displayNum,
-    couldPost,
-    resultText
-  }
+Demo.propTypes = {
+  displayNum: PropTypes.number.isRequired,
+  couldPost: PropTypes.bool.isRequired,
+  resultText: PropTypes.string.isRequired,
+  add_num: PropTypes.func.isRequired,
+  sub_num: PropTypes.func.isRequired,
+  post_num: PropTypes.func.isRequired
 }
 
-const mapDispatchToProps = {add_num, sub_num, post_num}
-
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+export default Demo

@@ -1,9 +1,9 @@
 import { createStore, applyMiddleware } from 'redux'
 import thunkMiddleware from 'redux-thunk'
-import demoReducer from '../reducer/demo'
+import rootReducer from '../reducer/root'
 
 const createStoreWithMiddleware = applyMiddleware(
   thunkMiddleware
 )(createStore)
 
-export default createStoreWithMiddleware(demoReducer, window.devToolsExtension && window.devToolsExtension())
+export default createStoreWithMiddleware(rootReducer, window.devToolsExtension && window.devToolsExtension())

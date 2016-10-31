@@ -72,6 +72,7 @@ module.exports = {
       sourceMap: false,
       mangle: false,
       minimum: true,
+      sourceMap: true,
       compress: {
         warnings: false
       }
