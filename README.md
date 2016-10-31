@@ -9,7 +9,7 @@ by kimi
 
 ##Do
 + Structure  
-
+```
   src
   ├─ action
   |    └─ your_action.js
@@ -24,7 +24,7 @@ by kimi
   |    └─ your_styl.styl
   └─ img  (ease)
        └─ your_img.jpg
-
+```
 + Output  
   You will see your component display as a route/page in view.
 
