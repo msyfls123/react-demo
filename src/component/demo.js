@@ -24,7 +24,10 @@ class Demo extends Component {
     const {displayNum, couldPost, resultText, add_num, sub_num, post_num} = this.props
     return (
       <div>
-      <table className='table table-bordered table-zebra demo'>
+      <div className='hd'>
+        <h2>Sacrifice youself!</h2>
+      </div>
+      <table className='bd table table-bordered table-zebra demo'>
         <tbody>
           <tr>
             <td> His extra Time </td>
