@@ -1,6 +1,18 @@
 import React, { Component } from 'react'
 import { findDOMNode } from 'react-dom'
 
+const FONTS = [
+  'Pick one font already in your PC',
+  'STHeiti-Light',
+  'Hiragino Sans GB',
+  '方正硬笔行书简体',
+  '方正像素12',
+  '迷你简剪纸',
+  '方正清刻本悦宋简体',
+  '汉仪细行楷简',
+  '造字工房力黑（非商用）',
+  '博洋行书'
+]
 const colorList = ['r', 'g', 'b', 'a']
 function getColor(tcolor){
   const arr = [0,1,2,3,4,5,6,7,8,9,'A','B','C','D','E','F'],
@@ -20,16 +32,18 @@ class SVG extends Component {
     super(props)
     this.change=this.change.bind(this)
     this.changeText=this.changeText.bind(this)
+    this.changeFont=this.changeFont.bind(this)
     this.handleColor=this.handleColor.bind(this)
     this.handlePos=this.handlePos.bind(this)
     this.state={
-      len: 50,
-      text: '这里是SVG文字',
-      x: 0,
-      y: 20,
-      r: 51,
-      g: 153,
-      b: 204,
+      len: 30,
+      text: '商女不知亡国恨,隔江犹唱后庭花',
+      font: 'Hiragino Sans GB',
+      x: 10,
+      y: 25,
+      r: 192,
+      g: 90,
+      b: 50,
       a: 1.0,
     }
   }
@@ -42,6 +56,14 @@ class SVG extends Component {
   changeText(e) {
     this.setState({
       text: e.target.value
+    })
+  }
+  changeFont(e) {
+    if (e.target.value === 'Pick one font already in your PC') {
+      return false
+    }
+    this.setState({
+      font: e.target.value
     })
   }
   handleColor(e){
@@ -64,6 +86,7 @@ class SVG extends Component {
     this.canvas = findDOMNode(this.refs.canvas),
     this.tempImg = new Image(),
     this.ctx = this.canvas.getContext('2d')
+    this.componentDidUpdate()
   }
   componentDidUpdate() {
     if(this.isPainting) return
@@ -77,29 +100,59 @@ class SVG extends Component {
   }
   render() {
     const circleColor = colorList.map(d => this.state[d]).join(',')
+    const styleText = {
+      fontFamily: this.state.font,
+      fontSize: 20
+    }
+    const splitText = this.state.text.split(',').map((t, idx) => (
+      <text x={this.state.x} y={this.state.y + 24 * idx} fill='rgb(192,90,50)' style={styleText}>{t}</text>
+    ))
+    const svgStyle = {
+      backgroundColor: '#f2f2f2'
+    }
+    const fontList = FONTS.map(font => (
+      <option value={font}>{font}</option>
+    ))
     return (
       <div>
         <ul className='svg'>
           <li>
-          <svg width='200' height='200' ref='svg' xmlns='http://www.w3.org/2000/svg'>
-            <circle cx='100' cy='100' r={this.state.len} stroke='black' strokeWidth='2' fill={'rgba('+ circleColor + ')'}/>
-            <text x={this.state.x} y={this.state.y}>{this.state.text}</text>
-          </svg>
+            <svg width='200' height='200' ref='svg' style={svgStyle} xmlns='http://www.w3.org/2000/svg'>
+              <circle cx='150' cy='150' r={this.state.len} fill={'rgba('+ circleColor + ')'}/>
+              {splitText}
+            </svg>
+            <p className='help-block'>SVG</p>
           </li>
-          <li><img width='200' height='200' ref='img' src=''/></li>
-          <li><canvas width='200' height='200' ref='canvas' /></li>
+          <li>
+            <img width='200' height='200' ref='img' src=''/>
+            <p className='help-block'>SVG Image</p>
+          </li>
+          <li>
+            <canvas width='200' height='200' ref='canvas' />
+            <p className='help-block'>Canvas</p>
+          </li>
         </ul>
         <form className='form-horizontal'>
+          <div className='field-group'>
+            <label className="field-label">Text</label>
+            <div className="fields-inline">
+              <textarea rows="5" placeholder="placeholder" value={this.state.text} className="col5" onChange={this.changeText}></textarea>
+            </div>
+          </div>
+          <div className='field-group'>
+            <label className="field-label">Font</label>
+            <div className="fields-inline">
+              <input type="text" value={this.state.font} onChange={this.changeFont}/>
+              <select value={this.state.font} onChange={this.changeFont}>
+                {fontList}
+              </select>
+            </div>
+
+          </div>
           <div className='field-group'>
             <label className="field-label">Radius</label>
             <div className="fields-inline">
               <input type="range" min="1" max="100" className="col3" onChange={this.change}/>
-            </div>
-          </div>
-          <div className='field-group'>
-            <label className="field-label">Text</label>
-            <div className="fields-inline">
-              <input type="text" value={this.state.text} onChange={this.changeText}/>
             </div>
           </div>
           <div className='field-group'>

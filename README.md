@@ -30,3 +30,6 @@ by kimi
 
 ##?
 Anyway, it's just a demo, don't take it serious...
+
+##Art with SVG and canvas
+![Art with SVG and canvas](douban.gif)
