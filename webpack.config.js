@@ -35,7 +35,8 @@ module.exports = {
     loaders:[
       {test:/\.(js|jsx)$/, loader:'babel', exclude:/node_modules/},
       {test:/\.styl$/, loader:ExtractTextPlugin.extract('style', 'css!stylus', {publicPath: '../'})},
-      {test:/\.(png|jpg|gif)$/, loader:'url?limit=8192&name=img/[name].[ext]?[hash]'}
+      {test:/\.(png|jpg|gif)$/, loader:'url?limit=8192&name=img/[name].[ext]?[hash]'},
+      {test:/\.(eot|svg|ttf|TTF|woff)$/, loader:'url?limit=1000&name=font/[name].[ext]?[hash]'}
     ]
   },
   resolve:{

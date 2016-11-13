@@ -4,7 +4,7 @@ import * as container from './container'
 
 const linkList = Object.keys(container)
 const index = linkList.findIndex(function(value){
-  return value==='Demo'
+  return value==='Home'
 })
 linkList.splice(index, 1)
 
@@ -37,7 +37,7 @@ const compMap = linkList.map(d => (
 
 export default (
   <Route path='/' component={Main}>
-    <IndexRoute component={container['Demo']}/>
+    <IndexRoute component={container['Home']}/>
     { compMap }
   </Route>
 )
